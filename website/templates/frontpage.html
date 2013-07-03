@@ -139,7 +139,7 @@
                           $.getJSON('{{FF_SAMPLE_LOCATION}}', function(data) {
                             var items = [];
  
-                            $.each(data, function(ff) {
+                            $.each(data, function(index, ff) {
                               items.push('<div class="span1 ff_picture"><img src="' + ff.im.url + '" width="'+ff.im.width+'" height="'+ ff.im.height+'"/><p>'+ ff.name+'</p></div>');
                             });
                             var content = items.join("");
