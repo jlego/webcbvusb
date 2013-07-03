@@ -92,4 +92,6 @@ STATICFILES_DIRS = (
 )
 
 FF_SAMPLE_LOCATION = "http://localhost:8000/bomberos/sample/"
+STATS_LOCATION = "http://localhost:8000/estadisticas/plain"
+
 GA = ''
