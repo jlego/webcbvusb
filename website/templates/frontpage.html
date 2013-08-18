@@ -120,34 +120,39 @@
 		</div>
   	</div>
 {%endblock%}
- {% block scripts%}
-	 {{ block.super }}
-	 {% block extra_scripts%}
-	    <script src="{{STATIC_URL}}js/libs/plugins.js"></script>
-	    <script src="{{STATIC_URL}}js/libs/bootstrap-transition.js"></script>
-	    <script src="{{STATIC_URL}}js/libs/bootstrap-carousel.js"></script>
-	    <script src="{{STATIC_URL}}js/libs/bootstrap-collapse.js"></script>
+{% block scripts%}
+  {{ block.super }}
+  
+  <script src="{{STATIC_URL}}js/libs/plugins.js"></script>
+  <script src="{{STATIC_URL}}js/libs/bootstrap-transition.js"></script>
+  <script src="{{STATIC_URL}}js/libs/bootstrap-carousel.js"></script>
+  <script src="{{STATIC_URL}}js/libs/bootstrap-collapse.js"></script>
 	    		
-	  	<script>
-			$(document).ready(function(){
-			  $('.carousel').carousel();
-			  $(".collapse").collapse({parent:"#accordion_cursos"});
-		   	  if($(window).width() < 800){
-		   	    $("div.fb-like").attr('data-width', $(window).width()*0.6);
-		   	  }
-                          
-                          $.getJSON('{{FF_SAMPLE_LOCATION}}', function(data) {
-                            var items = [];
- 
-                            $.each(data, function(index, ff) {
-                              items.push('<div class="span1 ff_picture"><img src="' + ff.im.url + '" width="'+ff.im.width+'" height="'+ ff.im.height+'"/><p>'+ ff.name+'</p></div>');
-                            });
-                            var content = items.join("");
-                            $("div#ff_container").append(content);
-                            
-                          });
-                          
-		   });
-		  </script>
-	  {%endblock%}
-	{%endblock%}
+  <script>
+  $(document).ready(function(){
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    
+    $('.carousel').carousel();
+    $(".collapse").collapse({parent:"#accordion_cursos"});
+    if($(window).width() < 800){
+      $("div.fb-like").attr('data-width', $(window).width()*0.6);
+    }
+    
+    $.getJSON('{{FF_SAMPLE_LOCATION}}', function(data) {
+      var items = [];
+      $.each(data, function(index, ff) {
+        items.push('<div class="span1 ff_picture"><img src="' + ff.im.url + '" width="'+ff.im.width+'" height="'+ ff.im.height+'"/><p>'+ ff.name+'</p></div>');
+      });
+      var content = items.join("");
+      $("div#ff_container").append(content); 
+    });
+  });
+  </script>
+  
+{%endblock%}
